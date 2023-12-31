@@ -1,5 +1,7 @@
 # dod-lite-flysystem
 
+[![.github/workflows/tests.yml](https://github.com/thedava/dod-lite-flysystem/actions/workflows/tests.yml/badge.svg)](https://github.com/thedava/dod-lite-flysystem/actions/workflows/tests.yml)
+
 A [Flysystem](https://github.com/thephpleague/flysystem) adapter for [dod-lite](https://github.com/thedava/dod-lite)
 
 ## Installation
