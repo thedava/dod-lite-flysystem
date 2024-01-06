@@ -62,3 +62,14 @@ test('readAll without data works', function (): void {
     $documents = iterator_to_array($flysystemAdapter->readAll('collection'));
     expect($documents)->toBe([]);
 });
+
+test('getAllCollectionNames works', function () {
+    $flysystemAdapter = createFlysystemAdapter();
+
+    $flysystemAdapter->write('collection1', 'key', ['data' => 'value']);
+    $flysystemAdapter->write('collection2', 'key', ['data' => 'value']);
+    $flysystemAdapter->write('collection3', 'key', ['data' => 'value']);
+
+    $collectionNames = iterator_to_array($flysystemAdapter->getAllCollectionNames());
+    expect($collectionNames)->toContain('collection1', 'collection2', 'collection3');
+});

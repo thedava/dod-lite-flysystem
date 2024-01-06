@@ -17,14 +17,17 @@ composer require thedava/dod-lite-flysystem
 The `FlysystemAdapter` uses the `League\Flysystem` to provide a simple way to store data. The usage is pretty simple:
 
 ```php
-// Store data locally in files
+// Use your flysystem instance (e.g. with a LocalFilesystemAdapter)
+$flysystem = new \League\Flysystem\Filesystem(
+    new \League\Flysystem\Local\LocalFilesystemAdapter(
+       '/path/to/your/storage'
+    )
+);
+
+// Store data locally in files using your flysystem instance
 $documentManager = new \DodLite\DocumentManager(
     new \DodLite\Extension\Flysystem\Adapter\FlysystemAdapter(
-        new \League\Flysystem\Filesystem(
-            new \League\Flysystem\Local\LocalFilesystemAdapter(
-               '/path/to/your/storage'
-            )
-        )
+        $flysystem
     )
 );
 ```

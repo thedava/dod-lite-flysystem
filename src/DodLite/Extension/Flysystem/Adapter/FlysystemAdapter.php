@@ -12,6 +12,7 @@ use DodLite\Normalizer\JsonDecodeNormalizer;
 use DodLite\Normalizer\JsonEncodeNormalizer;
 use DodLite\Normalizer\NormalizerInterface;
 use Generator;
+use League\Flysystem\DirectoryAttributes;
 use League\Flysystem\FileAttributes;
 use League\Flysystem\Filesystem;
 use League\Flysystem\FilesystemException;
@@ -20,7 +21,7 @@ use Throwable;
 
 class FlysystemAdapter implements AdapterInterface
 {
-    private const FILE_EXTENSION = 'db.json';
+    private const FILE_EXTENSION = '.db.json';
 
     private readonly NormalizerInterface $idNormalizer;
     private readonly NormalizerInterface $collectionNormalizer;
@@ -44,12 +45,10 @@ class FlysystemAdapter implements AdapterInterface
 
     private function getPath(string $collection, string|int $id): string
     {
-        return sprintf(
-            '%s/%s.%s',
+        return implode('/', [
             $this->collectionNormalizer->normalize($collection),
-            $this->idNormalizer->normalize((string)$id),
-            self::FILE_EXTENSION,
-        );
+            $this->idNormalizer->normalize((string)$id) . self::FILE_EXTENSION,
+        ]);
     }
 
     public function has(string $collection, string|int $id): bool
@@ -107,13 +106,27 @@ class FlysystemAdapter implements AdapterInterface
             $contents = $this->filesystem->listContents($this->collectionNormalizer->normalize($collection));
             foreach ($contents->getIterator() as $item) {
                 if ($item instanceof FileAttributes) {
-                    $key = basename($item->path(), '.' . self::FILE_EXTENSION);
+                    $key = basename($item->path(), self::FILE_EXTENSION);
 
                     yield $key => $this->readPath($collection, $key, $item->path());
                 }
             }
         } catch (FilesystemException $e) {
             throw new NotFoundException($collection, documentId: null, previous: $e);
+        }
+    }
+
+    public function getAllCollectionNames(): Generator
+    {
+        try {
+            $contents = $this->filesystem->listContents('/');
+            foreach ($contents->getIterator() as $item) {
+                if ($item instanceof DirectoryAttributes) {
+                    yield basename($item->path());
+                }
+            }
+        } catch (FilesystemException) {
+            // nothing
         }
     }
 }
