@@ -5,6 +5,7 @@ namespace DodTest\Integration\Extension\Flysystem\Adapter;
 
 use DodLite\Exceptions\NotFoundException;
 use DodLite\Extension\Flysystem\Adapter\FlysystemAdapter;
+use DodLite\Filter\TrueFilter;
 use League\Flysystem\Filesystem;
 use League\Flysystem\InMemory\InMemoryFilesystemAdapter;
 
@@ -49,7 +50,7 @@ test('readAll works', function (): void {
     $flysystemAdapter->write('collection', 'key', ['data' => 'value']);
     $flysystemAdapter->write('collection', 'key2', ['data' => 'value2']);
 
-    $documents = iterator_to_array($flysystemAdapter->readAll('collection'));
+    $documents = iterator_to_array($flysystemAdapter->readAll('collection', new TrueFilter()));
     expect($documents)
         ->toHaveKey('key')
         ->toHaveKey('key2');
@@ -59,7 +60,7 @@ test('readAll works', function (): void {
 test('readAll without data works', function (): void {
     $flysystemAdapter = createFlysystemAdapter();
 
-    $documents = iterator_to_array($flysystemAdapter->readAll('collection'));
+    $documents = iterator_to_array($flysystemAdapter->readAll('collection', new TrueFilter()));
     expect($documents)->toBe([]);
 });
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3aa15737b0b45a0950703417584d2f87",
+    "content-hash": "d5892d2126e7cc63b291418181f57d03",
     "packages": [
         {
             "name": "league/flysystem",
@@ -214,16 +214,16 @@
         },
         {
             "name": "thedava/dod-lite",
-            "version": "v0.0.7",
+            "version": "v0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thedava/dod-lite.git",
-                "reference": "c0c5a242a126d9ad8ccd16de4d1dee0c5d4b5ae9"
+                "reference": "433b3e182cddc4d77411c24cf1f6e10f1c7c9884"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thedava/dod-lite/zipball/c0c5a242a126d9ad8ccd16de4d1dee0c5d4b5ae9",
-                "reference": "c0c5a242a126d9ad8ccd16de4d1dee0c5d4b5ae9",
+                "url": "https://api.github.com/repos/thedava/dod-lite/zipball/433b3e182cddc4d77411c24cf1f6e10f1c7c9884",
+                "reference": "433b3e182cddc4d77411c24cf1f6e10f1c7c9884",
                 "shasum": ""
             },
             "require": {
@@ -248,9 +248,9 @@
             "description": "A simple file based pseudo database",
             "support": {
                 "issues": "https://github.com/thedava/dod-lite/issues",
-                "source": "https://github.com/thedava/dod-lite/tree/v0.0.7"
+                "source": "https://github.com/thedava/dod-lite/tree/v0.1.0"
             },
-            "time": "2024-01-05T23:56:56+00:00"
+            "time": "2024-08-09T14:28:41+00:00"
         }
     ],
     "packages-dev": [

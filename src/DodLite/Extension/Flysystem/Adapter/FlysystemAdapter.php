@@ -7,6 +7,7 @@ use DodLite\Adapter\AdapterInterface;
 use DodLite\Exceptions\DeleteFailedException;
 use DodLite\Exceptions\NotFoundException;
 use DodLite\Exceptions\WriteFailedException;
+use DodLite\Filter\FilterInterface;
 use DodLite\Normalizer\FileNameNormalizer;
 use DodLite\Normalizer\JsonDecodeNormalizer;
 use DodLite\Normalizer\JsonEncodeNormalizer;
@@ -100,7 +101,7 @@ class FlysystemAdapter implements AdapterInterface
         }
     }
 
-    public function readAll(string $collection): Generator
+    public function readAll(string $collection, FilterInterface $filter): Generator
     {
         try {
             $contents = $this->filesystem->listContents($this->collectionNormalizer->normalize($collection));
